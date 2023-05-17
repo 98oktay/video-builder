@@ -1,0 +1,30 @@
+{
+  "name": "video-builder",
+  "version": "1.0.0",
+  "description": "",
+  "licenses": [
+    {
+      "type": "ISC"
+    }],
+  "main": "src/index.js",
+  "scripts": {
+    "start": "babel src -d dist --watch & nodemon dist/index.js -q"
+  },
+  "keywords": [],
+  "author": "98oktay <98oktay@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.17.2",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "react-hot-loader": "^4.13.0"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.21.5",
+    "colors": "^1.4.0",
+    "ffcreator": "^7.0.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
