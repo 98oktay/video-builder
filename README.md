@@ -56,6 +56,10 @@ Video oluşturma yapısı, bileşenlerin prop'larını kullanarak yapılandırı
     
     -   `color`: Sahne arka plan rengini belirler.
     -   `duration`: Sahnenin süresini belirler.
+    -   `preview`: Sadece bu sahnenin animasyonsuz halini 1 saniyelik önizlenmesini sağlar.
+    -   `outline`: Sahne içindeki bileşenleri vurgular. 
+
+
 -   `<Transition>` bileşeni:
     
     -   `effect`: Geçiş efektini belirler.
