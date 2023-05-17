@@ -1,4 +1,4 @@
-import staticState from "../staticState";
+import staticState from "./state";
 import colors from "colors";
 import path from "path";
 

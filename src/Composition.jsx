@@ -1,13 +1,13 @@
 
 import React from "react";
-import Scene from "./Components/Scene";
-import Creator from "./Components/Creator";
-import Text from "./Components/Text";
-import Transition from "./Components/Transition";
-import Image from "./Components/Image";
-import Group from "./Components/Group";
+import Scene from "./lib/Scene";
+import Creator from "./lib/Creator";
+import Text from "./lib/Text";
+import Transition from "./lib/Transition";
+import Image from "./lib/Image";
+import Group from "./lib/Group";
 
-function App() {
+function Composition() {
 
   return (
     <Creator name="video1">
@@ -42,4 +42,4 @@ function App() {
     </Creator>);
 }
 
-export default App;
+export default Composition;

@@ -1,7 +1,7 @@
 import React from "react";
 import { FFCreator } from "ffcreator";
-import staticState from "../staticState";
-import Renderer from "../Components/Renderer";
+import staticState from "./state";
+import Renderer from "./Renderer";
 
 const Creator = ({
   children,

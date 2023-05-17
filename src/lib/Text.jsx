@@ -1,5 +1,5 @@
-import staticState from "../staticState";
-import { makeAnimation, makePosition } from "../utils";
+import staticState from "./state";
+import { makeAnimation, makePosition } from "./utils";
 const { FFText, FFRect } = require("ffcreator");
 
 const Text = (props) => {

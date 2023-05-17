@@ -1,5 +1,5 @@
 import React from "react";
-import staticState from "../staticState";
+import staticState from "./state";
 const { FFScene } = require("ffcreator");
 
 

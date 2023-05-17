@@ -1,5 +1,4 @@
-import staticState from "../staticState";
-
+import staticState from "./state";
 
 export const makeAnimation = (elem, props) => {
   if (props.in) {
@@ -9,8 +8,6 @@ export const makeAnimation = (elem, props) => {
     elem.addEffect(...props.out);
   }
 }
-
-
 
 export const makePosition = (props) => {
   const { currentScene, currentGroup, options } = staticState;
@@ -27,7 +24,7 @@ export const makePosition = (props) => {
     x: 0,
     y: 0,
   }
-  if(currentGroup) {
+  if (currentGroup) {
     bounds = {
       ...currentGroup.getBounds()
     };

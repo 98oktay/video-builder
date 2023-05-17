@@ -1,4 +1,4 @@
-import staticState from "../staticState";
+import staticState from "./state";
 
 const Transition = ({ effect = "TricolorCircle", duration = 2 }) => {
 

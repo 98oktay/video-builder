@@ -6,9 +6,9 @@
     {
       "type": "ISC"
     }],
-  "main": "src/index.js",
+  "main": "src/build.js",
   "scripts": {
-    "start": "babel src -d dist --watch & nodemon dist/index.js -q"
+    "start": "babel src -d dist --watch & nodemon dist/build.js -q"
   },
   "keywords": [],
   "author": "98oktay <98oktay@gmail.com>",
