@@ -20,7 +20,8 @@ Video oluşturma işlemini gerçekleştirmek için `Composition` adlı bir bile�
 
 jsxCopy code
 
-`import React from "react";
+```
+import React from "react";
 import Scene from "./lib/Scene";
 import Creator from "./lib/Creator";
 import Text from "./lib/Text";
@@ -42,7 +43,8 @@ function Composition() {
   );
 }
 
-export default Composition;` 
+export default Composition;
+``` 
 
 Yukarıdaki örnekte, `Composition` bileşeni, video oluşturma yapısını kullanmaktadır. İçerisinde `<Scene>`, `<Transition>`, `<Text>`, `<Image>` ve `<Group>` bileşenleri kullanılarak sahneler oluşturulmaktadır.
 
