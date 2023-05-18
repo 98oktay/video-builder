@@ -10,22 +10,33 @@ const Text = (props) => {
     throw new Error("Text:'" + props.children + "' must be inside a Scene");
   }
 
-  const position = makePosition(props);
+  const position = makePosition({
+    ...props,
+    width: props.width || 10,
+    height: props.height || props.size || 20,
+  });
 
   const text = new FFText({
     text: props.children,
-    color: '#333333',
+    color: props.color || '#333333',
     ...position,
-    fontSize: 20,
+    fontSize: props.size || 20,
   });
+
+  if(currentGroup?.font) {
+    text.setFont(currentGroup.font);
+  }
+  if(props.font) {
+    text.setFont(props.font);
+  }
 
   makeAnimation(text, props);
   text.alignCenter();
 
   if (currentScene.outline) {
     const outline = new FFRect({
-      width: props?.width || 1,
-      height: 20,
+      width: props.width || 10,
+      height: props.height || props.size || 20,
       ...position,
       color: 'red',
       opacity: 0.5,
@@ -40,7 +51,7 @@ const Text = (props) => {
   currentScene.addChild(text);
 
 
-  if (currentGroup) {
+  if (currentGroup) {    
     currentGroup.addChild(text);
   }
 

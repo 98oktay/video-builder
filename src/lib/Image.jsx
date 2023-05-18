@@ -1,5 +1,7 @@
+import React from "react";
+import Group from "./Group";
 import staticState from "./state";
-import { makeAnimation, makePosition } from "./utils";
+import { makeAnimation, makePosition, makeSize } from "./utils";
 const { FFText, FFRect, FFImage } = require("ffcreator");
 import path from 'path';
 
@@ -13,8 +15,7 @@ const Image = (props) => {
 
   const imagePath = path.join(__dirname, './../../src/' + props.src);
 
-  const width = props.width || (props.height * props.aspectRatio);
-  const height = props.height || (props.width / props.aspectRatio);
+  const { width, height } = makeSize(props);
 
   const position = makePosition({
     ...props,
@@ -49,6 +50,14 @@ const Image = (props) => {
 
   if (currentGroup) {
     currentGroup.addChild(image);
+  }
+
+
+  if (props.children) {
+    const { children, x, y, out } = props;
+    return <Group {...{ x, y, in: props.in, out, width, height }}>
+      {children}
+    </Group>
   }
 
 

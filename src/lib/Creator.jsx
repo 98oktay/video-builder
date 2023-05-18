@@ -11,6 +11,7 @@ const Creator = ({
   width = 1080,
   height = 1080,
   fps = 30,
+  transparent = false,
 
 }) => {
 
@@ -19,6 +20,7 @@ const Creator = ({
     cacheDir,
     outputDir,
     parallel: 8,
+    transparent,
     width,
     height,
     fps,

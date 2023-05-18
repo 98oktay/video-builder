@@ -71,6 +71,14 @@ Video oluşturma yapısı, bileşenlerin prop'larını kullanarak yapılandırı
     -   `width`: Genişliğini belirler.
     -   `in`: Giriş animasyonunu yapılandırır.
     -   `out`: Çıkış animasyonunu yapılandırır.
+-   `<Video>` bileşeni:
+
+    -   `src`: Video dosyasının yolunu belirler.
+    -   `x`: Yatay konumunu belirler.
+    -   `y`: Dikey konumunu belirler.
+    -   `width`: Genişliğini belirler.
+    -   `in`: Giriş animasyonunu yapılandırır.
+    -   `out`: Çıkış animasyonunu yapılandırır.
 -   `<Image>` bileşeni:
     
     -   `src`: Görüntünün kaynak dosyasının yolunu belirler.
@@ -87,6 +95,10 @@ Video oluşturma yapısı, bileşenlerin prop'larını kullanarak yapılandırı
     -   `height`: Yüksekliğini belirler.
     -   `in`: Giriş animasyonunu yapılandırır.
     -   `out`: Çıkış animasyonunu yapılandırır.
+    -   `list`: Grup içindeki bileşenlerin sıralamasını belirler.
+    -   `itemHeight`: Grup içindeki bileşenlerin yüksekliğini belirler.
+    -   `itemWidth`: Grup içindeki bileşenlerin genişliğini belirler.
+    -   `itemSpacing`: Grup içindeki bileşenlerin arasındaki boşluğu belirler.
 
 Bu bileşenlere ek olarak, `<Creator>` bileşeni de kullanılmaktadır. Bu bileşen, oluşturulan videoyu adlandırmak için bir `name` prop'u alır.
 

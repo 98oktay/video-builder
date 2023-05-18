@@ -9,6 +9,51 @@ export const makeAnimation = (elem, props) => {
   }
 }
 
+export const makeSize = (props) => {
+  let { width, height, aspectRatio } = props;
+  const { currentScene, currentGroup, options } = staticState;
+
+
+  if (width === undefined) {
+    width = props.height * aspectRatio
+  }
+
+  if (height === undefined) {
+    height = props.width / aspectRatio
+  }
+
+
+  // scene bounds
+  let bounds = {
+    width: options.width,
+    height: options.height,
+    x: 0,
+    y: 0,
+  }
+  if (currentGroup) {
+    bounds = {
+      ...currentGroup.getBounds()
+    };
+  }
+
+  if (typeof width === "string") {
+    if (width.indexOf('%') > -1) {
+      width = bounds.width * (parseInt(width) / 100);
+    }
+  }
+
+  if (typeof height === "string") {
+    if (height.indexOf('%') > -1) {
+      height = bounds.height * (parseInt(height) / 100);
+    }
+  }
+
+  return {
+    width,
+    height,
+  }
+}
+
 export const makePosition = (props) => {
   const { currentScene, currentGroup, options } = staticState;
 
@@ -34,6 +79,22 @@ export const makePosition = (props) => {
     x: x === null || x === undefined ? "center" : x,
     y: y === null || y === undefined ? "center" : y,
   }
+
+  if (currentGroup?.listOptions) {
+    const { type, itemSpacing, nextPositionY, itemHeight } = currentGroup.listOptions;
+    if (type === "vertical") {
+      pos.y = "top";
+      if (nextPositionY && itemSpacing) {
+        bounds.y += itemSpacing;
+      }
+      bounds.y += nextPositionY;
+      currentGroup.listOptions.nextPositionY += (itemHeight || height);
+      currentGroup.listOptions.itemCount++;
+    }
+
+
+  }
+
 
   if (typeof pos.x === 'string') {
     if (pos.x === 'center') {

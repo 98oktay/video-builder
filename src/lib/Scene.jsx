@@ -22,7 +22,10 @@ const Scene = ({ color, duration = 6, children, preview, outline }) => {
 
   const scene = new FFScene();
 
-  scene.setBgColor(color || "#ffcc22");
+  if(color) {
+    scene.setBgColor(color || "#ffcc22");
+  }
+  
   scene.setDuration(duration);
   creator.addChild(scene);
   
