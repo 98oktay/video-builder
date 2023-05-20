@@ -1,26 +1,25 @@
-
 import React from "react";
-import Scene from "./lib/Scene";
-import Creator from "./lib/Creator";
-import Text from "./lib/Text";
-import Transition from "./lib/Transition";
-import Image from "./lib/Image";
-import Group from "./lib/Group";
 import path from "path";
-import Video from "./lib/Video";
+import { Creator, Group, Image, Scene, Text, Transition, Video } from "./lib";
+import Box from "./lib/Box";
+import Line from "./lib/Line";
 
 const fontAllison = path.join(__dirname, "../src", "fonts", "Allison-Regular.ttf")
 
 function Composition() {
 
   return (
-    <Creator name="video1" fps={30}>
-      <Scene color="#cecece" duration={5}>
-        <Image src="./assets/header.jpg" width={"100%"} height={220} y={0} in={['fadeInLeft', 1, 0]}>
-          <Text width={70}>Oktay 3</Text>
+    <Creator name="video1" fps={30} width={800} height={900}>
+
+      <Scene color="#888888" duration={5} preview>
+        <Image
+          radius={[40, 140]}
+          border={{ width: 32, color: 'white' }}
+          url="https://images.pexels.com/videos/1409899/free-video-1409899.jpg?auto=compress&cs=tinysrgb&w=800" width={400} height={200} y={22} in={['fadeInLeft', 1, 0]}>
+          <Text y={"90%"} color="white">Rounded and Bordered Image</Text>
         </Image>
 
-        <Group x={"30%"} y={"30%"} width={300} height={300} in={['fadeInUp', 1, 0]}
+        <Group x={"30%"} y={"40%"} width={300} height={300} in={['fadeInUp', 1, 0]}
           out={['fadeOut', 1, 2]}>
           <Text x="right" width={80}>Başkuş</Text>
           <Text x="left" in={['fadeInDown', 1, .1]} width={80}>Oktay 2</Text>
@@ -37,40 +36,40 @@ function Composition() {
             font={fontAllison}
             size={160}
             height={200}
-            color="white"
-          >Video Content</Text>
-
-
+            color="white">Video Content</Text>
         </Video>
 
+        <Box width={400} height={400} border={{ width: 10, color: "#000000" }} color={["#ff000080", "#0000ff", "#ffff00"]} radius={50} x={100} y={600} in={['bounceInDown', 1, .2]} />
+        <Line
+          x={100} y={300}
+          x2={700} y2={300}
+          border={2} color={["#ff0000", "#ffff00"]}
+          in={['bounceInDown', 1, .2]} />
 
       </Scene>
       <Transition effect="TricolorCircle" duration={3} />
       <Scene color="#222222">
+        <Video src="./assets/video2.mp4" width={"100%"} height={"100%"}>
+          <Group width={200} height={300} list="vertical">
+            <Text>Item1</Text>
+            <Text>Item2</Text>
+            <Text>Item3</Text>
+            <Text>Item4</Text>
+          </Group>
 
-        <Group width={200} height={300} list="vertical">
-          <Text>Item1</Text>
-          <Text>Item2</Text>
-          <Text>Item3</Text>
-          <Text>Item4</Text>
-        </Group>
-
-
-        <Text x={"center"} y="90%"
-          font={fontAllison}
-          size={30}
-          color="white"
-          in={['bounceInUp', 1, .3]}
-          out={['fadeOut', 1, 2]}
-          width={100}>Copyright 2023</Text>
-        <Image src="./assets/logo.png" x={"center"} y={"80%"} width={300}
-          in={['fadeInUp', 1, 1]}
-          aspectRatio={5000 / 694}
-        />
+          <Text x={"center"} y="90%"
+            font={fontAllison}
+            size={30}
+            color="white"
+            in={['bounceInUp', 1, .3]}
+            out={['fadeOut', 1, 2]}
+            width={100}>Copyright 2023</Text>
+          <Image src="./assets/logo.png" x={"center"} y={"80%"} width={300}
+            in={['fadeInUp', 1, 1]}
+            aspectRatio={5000 / 694}
+          />
+        </Video>
       </Scene>
-
-
-
     </Creator>);
 }
 

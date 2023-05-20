@@ -21,6 +21,8 @@ const Creator = ({
     outputDir,
     parallel: 8,
     transparent,
+    highWaterMark: '10mb',
+    debug: false,
     width,
     height,
     fps,

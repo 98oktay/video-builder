@@ -30,6 +30,13 @@ const Text = (props) => {
     text.setFont(props.font);
   }
 
+
+  if(props.wrap && props.wrap !== 'none') {
+    text.setWrap(parseInt(props.wrap));
+  }
+
+ 
+
   makeAnimation(text, props);
   text.alignCenter();
 
@@ -48,12 +55,21 @@ const Text = (props) => {
     }
   }
 
-  currentScene.addChild(text);
-
-
   if (currentGroup) {    
+
+    const bounds = currentGroup.getBounds();
+      if(bounds.width && !props.wrap) {
+        text.setWrap(bounds.width);
+      }
     currentGroup.addChild(text);
   }
+
+  if(props.width && props.wrap !== 'none') {
+    text.setWrap(parseInt(props.width));
+  }
+
+
+  currentScene.addChild(text);
 
   return null;
 }

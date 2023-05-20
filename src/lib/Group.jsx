@@ -2,36 +2,8 @@ import React from "react";
 import staticState from "./state";
 import { makeAnimation, makePosition } from "./utils";
 const { FFText, FFRect } = require("ffcreator");
+const FFGroup = require("./extends/FFGroup");
 
-class FFGroup {
-  constructor(bounds, parent) {
-    this.childs = [];
-    this.bounds = { ...bounds }
-    this.parent = parent;
-    this.font = parent?.font;
-    this.listOptions = {}
-  }
-
-  addChild(child) {
-    this.childs.push(child);
-  }
-
-  setBounds(bounds) {
-    this.bounds = bounds;
-  }
-
-  getBounds() {
-    return this.bounds;
-  }
-
-  setFont(font) {
-    this.font = font;
-  }
-
-  setListOptions(options) {
-    this.listOptions = options;
-  }
-}
 
 const GroupClose = (props) => {
   const { currentGroup, previousGroup } = staticState;

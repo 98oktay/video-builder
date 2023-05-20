@@ -2,7 +2,7 @@ import React from "react";
 import Group from "./Group";
 import staticState from "./state";
 import { makeAnimation, makePosition, makeSize } from "./utils";
-const { FFText, FFRect, FFVideo } = require("ffcreator");
+const { FFRect, FFVideo } = require("ffcreator");
 import path from 'path';
 
 const Video = (props) => {
@@ -29,6 +29,7 @@ const Video = (props) => {
     ...position,
     width,
     height,
+    audio: props.muted === false,
     scale: props.scale,
   });
 
@@ -46,6 +47,9 @@ const Video = (props) => {
     currentScene.addChild(outline);
   }
 
+  if(props.blend) {
+    image.addBlend(props.blend);
+  }
   currentScene.addChild(video);
 
   if (currentGroup) {
@@ -53,8 +57,23 @@ const Video = (props) => {
   }
 
   if (props.children) {
-    const { children, x, y, out } = props;
-    return <Group {...{ x, y, in: props.in, out, width, height }}>
+    const { children, x, y} = props;
+    const groupProps = { x, y, in: props.ins, out: props.outs, width, height };
+
+    const parentSizes = makeSize({
+      width: "100%",
+      height: "100%",
+    });
+   
+    if (isNaN(width)) {
+      groupProps.width = parentSizes.width;
+    }
+    if (isNaN(height)) {
+      groupProps.height = parentSizes.height;
+    }
+
+
+    return <Group {...groupProps}>
       {children}
     </Group>
   }

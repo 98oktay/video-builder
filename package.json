@@ -5,7 +5,8 @@
   "licenses": [
     {
       "type": "ISC"
-    }],
+    }
+  ],
   "main": "src/build.js",
   "scripts": {
     "start": "babel src -d dist --watch & nodemon dist/build.js -q"
@@ -22,9 +23,13 @@
   },
   "dependencies": {
     "@babel/cli": "^7.21.5",
+    "axios": "^1.4.0",
     "colors": "^1.4.0",
     "ffcreator": "^7.0.3",
+    "md5": "^2.3.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "sharp": "^0.32.1",
+    "sync-fetch": "^0.4.2"
   }
 }
