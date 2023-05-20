@@ -1,6 +1,6 @@
 import React from "react";
 import staticState from "./state";
-const { FFScene } = require("ffcreator");
+import { FFScene } from "ffcreator";
 
 
 const SceneClose = () => {
@@ -12,8 +12,15 @@ const SceneClose = () => {
   return null;
 }
 
+type SceneProps = {
+  color?: string,
+  duration?: number,
+  children?: any,
+  preview?: boolean,
+  outline?: boolean,
+}
 
-const Scene = ({ color, duration = 6, children, preview, outline }) => {
+const Scene = ({ color, duration = 6, children, preview, outline }: SceneProps) => {
   const { creator, scenes } = staticState;
 
   if (!creator) {
@@ -22,23 +29,23 @@ const Scene = ({ color, duration = 6, children, preview, outline }) => {
 
   const scene = new FFScene();
 
-  if(color) {
+  if (color) {
     scene.setBgColor(color || "#ffcc22");
   }
-  
+
   scene.setDuration(duration);
   creator.addChild(scene);
-  
 
-  if(preview) {
+
+  if (preview) {
     staticState.preview = scene;
   }
 
-  if(outline) {
-    scene.outline = true;
-  }
-
   staticState.currentScene = scene;
+
+  if (outline) {
+    staticState.currentScene.outline = true;
+  }
 
 
   scenes.push(scene);

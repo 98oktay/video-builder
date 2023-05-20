@@ -1,21 +1,33 @@
+import { FFRect, AblendTypes } from "ffcreator";
 import FFLine from "./extends/FFLine";
 import staticState from "./state";
-import { makeAnimation, makePosition } from "./utils";
-const { FFText, FFRect } = require("ffcreator");
+import { makeAnimation } from "./utils";
 
-const Line = (props) => {
+type LineProps = {
+  x: number,
+  y: number,
+  x2: number,
+  y2: number,
+  color?: string | string[],
+  border?: string | number | { width: number, color: string },
+  radius?: number | number[],
+  blend?: string,
+  children?: any,
+  in?: any,
+  out?: any,
+}
 
+const Line = (props: LineProps) => {
   const { currentScene, currentGroup } = staticState;
 
   if (!currentScene) {
-    throw new Error("Box: must be inside a Scene");
+    throw new Error("Line: must be inside a Scene");
   }
 
-  const lineWidth = props?.border?.width || props?.border;
+  const lineWidth = typeof props.border === 'number' ? props.border : typeof props.border === 'object' ? props.border.width : 0;
 
-
-  const [left, top] = [Math.min(props?.x, props?.x2), Math.min(props?.y, props?.y2)];
-  const [right, bottom] = [Math.max(props?.x, props?.x2), Math.max(props?.y, props?.y2)];
+  const [left, top] = [Math.min(props?.x || 0, props?.x2 || 0), Math.min(props?.y || 0, props?.y2 || 0)];
+  const [right, bottom] = [Math.max(props?.x || 0, props?.x2 || 0), Math.max(props?.y || 0, props?.y2 || 0)];
 
   const width = (Math.abs(right - left)) + lineWidth;
   const height = (Math.abs(bottom - top)) + lineWidth;
@@ -23,7 +35,7 @@ const Line = (props) => {
   const [x, y] = [left, top];
 
   if (!props.color && !props.border) {
-    throw new Error("Box: must have a color or border");
+    throw new Error("Line: must have a color or border");
   }
 
   const box = new FFLine({
@@ -38,7 +50,7 @@ const Line = (props) => {
   });
 
   if (props.blend) {
-    box.addBlend(props.blend);
+    box.addBlend(props.blend as AblendTypes);
   }
 
   makeAnimation(box, props);

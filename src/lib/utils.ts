@@ -1,10 +1,9 @@
+import sharp from "sharp";
 import md5 from "md5";
 import path from 'path';
 import fs from 'fs'
 import fetch from 'sync-fetch';
-
 import staticState from "./state";
-import sharp from "sharp";
 
 export const makeAnimation = (elem, props) => {
   if (props.in) {
@@ -22,12 +21,12 @@ export const makeAnimation = (elem, props) => {
 export const loadFromNetwork = (props) => {
 
   let imagePath;
-  let imageData;
+  let imageData: Buffer | null = null;
   const hash = md5(JSON.stringify(props));
   const filename = props.url.split("/").pop().split(".")[0] + hash;
   imagePath = path.join(__dirname, './../../.tmp/', `./${filename}.png`);
   if (!fs.existsSync(imagePath)) {
-    imageData = fetch(props.url).buffer();
+    imageData = fetch(props.url).buffer() as Buffer;
     fs.promises.writeFile(imagePath, imageData, { encoding: null })
   }
 

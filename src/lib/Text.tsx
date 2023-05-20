@@ -1,8 +1,25 @@
+import { type } from "os";
 import staticState from "./state";
 import { makeAnimation, makePosition } from "./utils";
 const { FFText, FFRect } = require("ffcreator");
 
-const Text = (props) => {
+
+type TextProps = {
+  x?: string | number,
+  y?: string | number,
+  width?: number,
+  height?: number,
+  size?: number,
+  color?: string,
+  font?: string,
+  wrap?: string,
+  children?: any,
+  in?: any,
+  out?: any,
+}
+
+
+const Text = (props: TextProps) => {
 
   const { currentScene, currentGroup } = staticState;
 
@@ -23,19 +40,16 @@ const Text = (props) => {
     fontSize: props.size || 20,
   });
 
-  if(currentGroup?.font) {
+  if (currentGroup?.font) {
     text.setFont(currentGroup.font);
   }
-  if(props.font) {
+  if (props.font) {
     text.setFont(props.font);
   }
 
-
-  if(props.wrap && props.wrap !== 'none') {
+  if (props.wrap && props.wrap !== 'none') {
     text.setWrap(parseInt(props.wrap));
   }
-
- 
 
   makeAnimation(text, props);
   text.alignCenter();
@@ -55,17 +69,17 @@ const Text = (props) => {
     }
   }
 
-  if (currentGroup) {    
+  if (currentGroup) {
 
     const bounds = currentGroup.getBounds();
-      if(bounds.width && !props.wrap) {
-        text.setWrap(bounds.width);
-      }
+    if (bounds.width && !props.wrap) {
+      text.setWrap(bounds.width);
+    }
     currentGroup.addChild(text);
   }
 
-  if(props.width && props.wrap !== 'none') {
-    text.setWrap(parseInt(props.width));
+  if (props.width && props.wrap !== 'none') {
+    text.setWrap(props.width);
   }
 
 

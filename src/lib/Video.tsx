@@ -1,11 +1,28 @@
 import React from "react";
-import Group from "./Group";
+import Group, { GroupProps } from "./Group";
 import staticState from "./state";
 import { makeAnimation, makePosition, makeSize } from "./utils";
 const { FFRect, FFVideo } = require("ffcreator");
 import path from 'path';
 
-const Video = (props) => {
+
+type VideoProps = {
+  x?: number,
+  y?: number,
+  width?: string | number,
+  height?: string | number,
+  src?: string,
+  scale?: number,
+  muted?: boolean,
+  children?: any,
+  in?: any,
+  out?: any,
+  ins? : any[],
+  outs? : any[],
+  blend?: string,
+} & GroupProps
+
+const Video = (props: VideoProps) => {
 
   const { currentScene, currentGroup } = staticState;
 
@@ -48,7 +65,7 @@ const Video = (props) => {
   }
 
   if(props.blend) {
-    image.addBlend(props.blend);
+    video.addBlend(props.blend);
   }
   currentScene.addChild(video);
 

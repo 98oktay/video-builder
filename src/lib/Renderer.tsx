@@ -7,17 +7,17 @@ const Renderer = () => {
   const { creator, fileName, options, scenes, preview } = staticState;
 
 
-  if(staticState.preview) {
+  if (staticState.preview) {
 
     staticState.creator.setFps(1);
     staticState.preview.setDuration(1);
 
-    preview.children.forEach(child => {
+    preview?.children.forEach(child => {
       child.animations.destroy();
     });
 
     scenes.forEach(scene => {
-      if(scene !== staticState.preview){
+      if (scene !== staticState.preview) {
         creator.removeChild(scene)
       }
 

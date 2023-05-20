@@ -1,12 +1,32 @@
 import React from "react";
-import Group from "./Group";
+import Group, { GroupProps } from "./Group";
 import staticState from "./state";
 import { loadFromNetwork, makeAnimation, makeBorder, makePosition, makeSize } from "./utils";
 const { FFRect, FFImage } = require("ffcreator");
 import path from 'path';
 
 
-const Image = (props) => {
+type ImageProps = {
+  x?: number,
+  y?: number,
+  width?: number,
+  height?: number,
+  src?: string,
+  url?: string,
+  radius?: number,
+  scale?: number,
+  children?: any,
+  animation?: any,
+  blend?: string,
+  relative?: [number, number],
+  in?: any,
+  out?: any,
+  ins? : any[],
+  outs? : any[],
+  border?: string,
+} & GroupProps
+
+const Image = (props: ImageProps) => {
 
   const { currentScene, currentGroup } = staticState;
 
@@ -24,7 +44,7 @@ const Image = (props) => {
 
 
   let imagePath = path.join(__dirname, './../../src/' + props.src);
-  let imageData = null;
+  let imageData: Buffer | null = null;
   const { children, ...saltProps } = props;
   if (props.url) {
     const networkImage = loadFromNetwork(saltProps);

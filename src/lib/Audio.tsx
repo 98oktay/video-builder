@@ -1,10 +1,21 @@
 import staticState from "./state";
-const { FFAudio, FFRect } = require("ffcreator");
+const { FFAudio } = require("ffcreator");
 import path from 'path';
 
-const Audio = (props) => {
+type AudioProps = {
+  src: string,
+  loop?: boolean,
+  mute?: boolean,
+  startTime?: number,
+  fadeIn?: number,
+  fadeOut?: number,
+  volume?: number,
+  children?: any
+}
 
-  const { currentScene, creator } = staticState;
+const Audio = (props: AudioProps) => {
+
+  const { creator } = staticState;
 
   if (!creator) {
     throw new Error("Audio:'" + props.children + "' must be inside a Scene or Creator");

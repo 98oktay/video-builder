@@ -2,21 +2,32 @@
 
 const { FFNode } = require('ffcreator');
 /**
- * FFRect - A solid color rectangle component
+ * FFBox - A color gradiented rectangle component
  *
  * ####Example:
  *
- *     const rect = new FFRect({ color: "#cc22ff", width: 400, height: 300 });
- *     rect.setColor("#00cc22");
- *     scene.addChild(rect);
+ *    const box = new FFBox({ color: "#cc22ff", width: 400, height: 300 });
+ *    box.setColor("#00cc22");
+ *    scene.addChild(box);
  *
  * @class
  */
 
 const { createCanvas, Sprite, Texture } = require('inkpaint');
 
+type FFBoxConfType = {
+  rect?: string,
+  border?: string | { width: number, color: string },
+  width?: number,
+  height?: number,
+  radius?: number | number[],
+  color?: string | string[],
+  x: number,
+  y: number,
+};
+
 class FFBox extends FFNode {
-  constructor(conf = { rect: '', border: '', style: { fontSize: 28 } }) {
+  constructor(conf: FFBoxConfType) {
     super({ type: 'box', ...conf });
     const { color = '#044EC5' } = this.conf;
     this.setColor(color);
@@ -100,8 +111,8 @@ class FFBox extends FFNode {
     const radius = this.conf.radius || 0;
     ctx.beginPath();
     ctx.roundRect(halfBorder, halfBorder, width - halfBorder * 2, height - halfBorder * 2, radius);
-    
-    if(lineWidth) {
+
+    if (lineWidth) {
       ctx.stroke();
     }
 
@@ -109,18 +120,18 @@ class FFBox extends FFNode {
     if (Array.isArray(this.color)) {
       const gradient = ctx.createLinearGradient(0, 0, width, height);
       // Add three color stops
-      const totalColor = this.color.length-1;
+      const totalColor = this.color.length - 1;
       this.color.forEach((color, index) => {
-        gradient.addColorStop(index/totalColor, color);
+        gradient.addColorStop(index / totalColor, color);
       });
       ctx.fillStyle = gradient;
-        
+
     } else {
       ctx.fillStyle = this.color;
     }
-    
+
     ctx.beginPath();
-    ctx.roundRect(halfBorder*2, halfBorder*2, width - halfBorder * 4, height - halfBorder * 4, radius-halfBorder);
+    ctx.roundRect(halfBorder * 2, halfBorder * 2, width - halfBorder * 4, height - halfBorder * 4, radius - halfBorder);
     ctx.fill();
 
 
@@ -133,4 +144,5 @@ class FFBox extends FFNode {
   }
 }
 
-module.exports = FFBox;
+
+export default FFBox;

@@ -1,24 +1,43 @@
 'use strict';
+import { createCanvas, Sprite, Texture } from 'inkpaint';
+import { FFNode } from 'ffcreator';
 
-const { FFNode } = require('ffcreator');
 /**
- * FFRect - A solid color rectangle component
- *
+ * FFLine - A color gradiented line component
  * ####Example:
- *
- *     const rect = new FFRect({ color: "#cc22ff", width: 400, height: 300 });
- *     rect.setColor("#00cc22");
- *     scene.addChild(rect);
+ *   const line = new FFLine({ color: "#cc22ff", width: 400, height: 300,  points: [] });
+ *   line.setColor("#00cc22");
+ *   scene.addChild(line);
  *
  * @class
  */
 
-const { createCanvas, Sprite, Texture } = require('inkpaint');
+type FFLineConfType = {
+  rect?: string,
+  border?: string | number | { width: number, color: string },
+  width?: number,
+  height?: number,
+  poinst?: number[],
+  radius?: number | number[],
+  color?: string | string[],
+  x: number,
+  y: number,
+};
+
 
 class FFLine extends FFNode {
-  constructor(conf = { rect: '', border: '', style: { fontSize: 28 } }) {
-    super({ type: 'line', ...conf });
-    const { color = '#044EC5' } = this.conf;
+  canvas: any;
+  display: any;
+  color: any;
+  border: any;
+  points: number[];
+  constructor(conf: FFLineConfType) {
+    super({ type: 'line', ...conf } as any);
+    const { color = '#044EC5' } = conf;
+    this.color = color;
+    this.border = conf.border;
+    this.points = conf.poinst || [0, 0, 0, 0];
+
     this.setColor(color);
     this.setAnchor(0);
     this.makeRect();
@@ -72,7 +91,7 @@ class FFLine extends FFNode {
   }
 
   makeRect() {
-    let border = this.conf.border || {
+    let border = this.border || {
       width: 0,
       color: 'black',
     };
@@ -89,19 +108,14 @@ class FFLine extends FFNode {
       }
     }
 
-
     const lineWidth = border.width;
-    const halfBorder = Math.ceil(lineWidth / 2);
 
-    const [ x, y, x2, y2 ] = this.conf.poinst;
+    const [x, y, x2, y2] = this.points;
 
-    let leftDiff = x - x2 > 0 ? x - x2: 0;
-    let topDiff = y - y2 > 0 ? y - y2: 0;
+    let leftDiff = x - x2 > 0 ? x - x2 : 0;
+    let topDiff = y - y2 > 0 ? y - y2 : 0;
 
     const [width, height] = this.getWH();
-
-    console.log('width', width);
-    console.log('height', height);
 
     const ctx = this.canvas.getContext('2d');
     ctx.lineWidth = lineWidth;
@@ -110,8 +124,8 @@ class FFLine extends FFNode {
     ctx.beginPath();
 
     ctx.lineCap = 'round';
-    ctx.moveTo(lineWidth/2 + leftDiff , lineWidth/2 + topDiff);
-    ctx.lineTo(x2 - x + lineWidth/2 + leftDiff , y2 - y + lineWidth/2 + topDiff);
+    ctx.moveTo(lineWidth / 2 + leftDiff, lineWidth / 2 + topDiff);
+    ctx.lineTo(x2 - x + lineWidth / 2 + leftDiff, y2 - y + lineWidth / 2 + topDiff);
 
 
     if (Array.isArray(this.color)) {
@@ -130,20 +144,13 @@ class FFLine extends FFNode {
     if (lineWidth) {
       ctx.stroke();
     }
-
-    //ctx.roundRect(halfBorder*2, halfBorder*2, width - halfBorder * 4, height - halfBorder * 4, radius-halfBorder);
-    //ctx.fill();
-
-
-
-
-
   }
 
   destroy() {
     this.canvas = null;
-    super.destroy();
+    super.destory();
   }
 }
 
-module.exports = FFLine;
+
+export default FFLine;

@@ -11,7 +11,7 @@ function Composition() {
   return (
     <Creator name="video1" fps={30} width={800} height={900}>
 
-      <Scene color="#888888" duration={5} preview>
+      <Scene color="transparent" duration={5} preview>
         <Image
           radius={[40, 140]}
           border={{ width: 32, color: 'white' }}

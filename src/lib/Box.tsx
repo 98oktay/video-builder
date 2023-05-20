@@ -1,9 +1,24 @@
 import FFBox from "./extends/FFBox";
 import staticState from "./state";
 import { makeAnimation, makePosition } from "./utils";
-const { FFText, FFRect } = require("ffcreator");
+import { FFRect } from "ffcreator";
 
-const Box = (props) => {
+type BoxProps = {
+  x?: number,
+  y?: number,
+  width?: number,
+  height?: number,
+  color?: string | string[],
+  border?: string | { width: number, color: string },
+  radius?: number | number[],
+  blend?: string,
+  children?: any,
+  in?: any,
+  out?: any,
+}
+
+
+const Box = (props: BoxProps) => {
 
   const { currentScene, currentGroup } = staticState;
 
@@ -17,7 +32,7 @@ const Box = (props) => {
     height: props.height || 10
   });
 
-  if(!props.color && !props.border) {
+  if (!props.color && !props.border) {
     throw new Error("Box: must have a color or border");
   }
 
@@ -25,22 +40,18 @@ const Box = (props) => {
     width: props.width || 10,
     border: props.border,
     radius: props.radius,
-    height: props.height || 10,
+    height: props.height || 10,
     color: props.color || 'transparent',
     ...position,
   });
 
-  if(props.blend) {
+  if (props.blend) {
     box.addBlend(props.blend);
   }
 
   makeAnimation(box, props);
 
-  if (currentGroup) {    
-    const bounds = currentGroup.getBounds();
-      if(bounds.width && !props.wrap) {
-        text.setWrap(bounds.width);
-      }
+  if (currentGroup) {
     currentGroup.addChild(box);
   }
 
@@ -49,7 +60,7 @@ const Box = (props) => {
   if (currentScene.outline) {
     const outline = new FFRect({
       width: props.width || 10,
-      height: props.height || 10,
+      height: props.height || 10,
       ...position,
       color: 'red',
       opacity: 0.5,

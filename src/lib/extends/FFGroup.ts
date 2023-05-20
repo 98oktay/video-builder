@@ -1,4 +1,14 @@
+
+
 class FFGroup {
+
+  childs: any[];
+  bounds: any;
+  parent: any;
+  font: any;
+  listOptions: any;
+
+
   constructor(bounds, parent) {
     this.childs = [];
     this.bounds = { ...bounds }
@@ -29,4 +39,4 @@ class FFGroup {
 }
 
 
-module.exports = FFGroup;
+export default FFGroup;

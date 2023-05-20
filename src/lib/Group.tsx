@@ -1,11 +1,26 @@
 import React from "react";
 import staticState from "./state";
-import { makeAnimation, makePosition } from "./utils";
-const { FFText, FFRect } = require("ffcreator");
-const FFGroup = require("./extends/FFGroup");
+import { makeAnimation, makePosition, makeSize } from "./utils";
+import { FFRect } from "ffcreator";
+import FFGroup from "./extends/FFGroup";
+import { parse } from "path";
 
+export type GroupProps = {
+  x?: string | number,
+  y?: string | number,
+  width?: string | number,
+  height?: string | number,
+  font?: string,
+  list?: string,
+  itemHeight?: number | string,
+  itemWidth?: number | string,
+  itemSpacing?: number | string,
+  children?: any,
+  in?: any,
+  out?: any,
+}
 
-const GroupClose = (props) => {
+const GroupClose = (props: GroupProps) => {
   const { currentGroup, previousGroup } = staticState;
   staticState.currentGroup = previousGroup;
   staticState.previousGroup = currentGroup.parent
@@ -31,7 +46,7 @@ const GroupClose = (props) => {
   return null;
 }
 
-const Group = (props) => {
+const Group = (props: GroupProps) => {
 
   const { currentScene, groups } = staticState;
 
@@ -40,8 +55,8 @@ const Group = (props) => {
   }
 
   const position = makePosition(props);
-  const width = props?.width || 1;
-  const height = props?.height || 20;
+  const { width, height } = makeSize(props);
+
 
   const group = new FFGroup({
     x: position.x - width / 2,
@@ -63,9 +78,9 @@ const Group = (props) => {
 
     const listOptions = {
       type: props.list,
-      itemHeight: parseInt(props.itemHeight),
-      itemWidth: parseInt(props.itemWidth || 1),
-      itemSpacing: parseInt(props.itemSpacing || 0),
+      itemHeight: props.itemHeight,
+      itemWidth: props.itemWidth,
+      itemSpacing: props.itemSpacing,
       itemCount: 0,
       nextPositionY: 0
     }
@@ -86,7 +101,6 @@ const Group = (props) => {
     currentScene.addChild(outline);
     group.addChild(outline);
   }
-
 
   groups.push(group);
 

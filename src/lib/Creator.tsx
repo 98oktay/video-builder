@@ -3,6 +3,17 @@ import { FFCreator } from "ffcreator";
 import staticState from "./state";
 import Renderer from "./Renderer";
 
+export interface CreatorProps {
+  name?: string;
+  cacheDir?: string;
+  outputDir?: string;
+  width?: number;
+  height?: number;
+  fps?: number;
+  transparent?: boolean;
+  children?: any;
+}
+
 const Creator = ({
   children,
   name = "",
@@ -13,7 +24,7 @@ const Creator = ({
   fps = 30,
   transparent = false,
 
-}) => {
+}: CreatorProps) => {
 
 
   staticState.options = {

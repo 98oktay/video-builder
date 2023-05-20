@@ -9,7 +9,7 @@
   ],
   "main": "src/build.js",
   "scripts": {
-    "start": "babel src -d dist --watch & nodemon dist/build.js -q"
+    "start": "babel src -d dist --watch --extensions .ts,.tsx,.js & nodemon dist/build.js -q"
   },
   "keywords": [],
   "author": "98oktay <98oktay@gmail.com>",
@@ -18,18 +18,20 @@
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "babel-loader": "^8.2.3",
-    "react-hot-loader": "^4.13.0"
+    "@types/react": "^18.2.6",
+    "babel-loader": "^8.2.3"
   },
   "dependencies": {
     "@babel/cli": "^7.21.5",
-    "axios": "^1.4.0",
+    "@babel/preset-typescript": "^7.21.5",
     "colors": "^1.4.0",
     "ffcreator": "^7.0.3",
     "md5": "^2.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "sharp": "^0.32.1",
-    "sync-fetch": "^0.4.2"
+    "sharp": "^0.23.3",
+    "sync-fetch": "^0.4.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4"
   }
 }
