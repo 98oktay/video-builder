@@ -21,13 +21,9 @@ Video oluşturma işlemini gerçekleştirmek için `Composition` adlı bir bile�
 jsxCopy code
 
 ```
+
 import React from "react";
-import Scene from "./lib/Scene";
-import Creator from "./lib/Creator";
-import Text from "./lib/Text";
-import Transition from "./lib/Transition";
-import Image from "./lib/Image";
-import Group from "./lib/Group";
+import { Creator, Scene, Transition } from "./lib";
 
 function Composition() {
   return (
@@ -59,7 +55,6 @@ Video oluşturma yapısı, bileşenlerin prop'larını kullanarak yapılandırı
     -   `preview`: Sadece bu sahnenin animasyonsuz halini 1 saniyelik önizlenmesini sağlar.
     -   `outline`: Sahne içindeki bileşenleri vurgular. 
 
-
 -   `<Transition>` bileşeni:
     
     -   `effect`: Geçiş efektini belirler.
@@ -82,11 +77,19 @@ Video oluşturma yapısı, bileşenlerin prop'larını kullanarak yapılandırı
 -   `<Image>` bileşeni:
     
     -   `src`: Görüntünün kaynak dosyasının yolunu belirler.
+    -   `url`: Görüntünün kaynak dosyasının URL'ini belirler.
+    -   `border`: Görüntünün kenarlığını belirler.
+    -   `radius`: Görüntünün köşelerinin yuvarlaklığını belirler.
+    -   `scale`: Görüntünün boyutunu belirler.
+    -   `relative`: Görüntünün göreceli konumunu belirler.
     -   `x`: Yatay konumunu belirler.
     -   `y`: Dikey konumunu belirler.
     -   `width`: Genişliğini belirler.
     -   `in`: Giriş animasyonunu yapılandırır.
+    -   `out`: Giriş animasyonunu yapılandırır.
+    -   `animation`: Görüntüye özel animasyonları yapılandırır.
     -   `aspectRatio`: Görüntünün en boy oranını belirler.
+
 -   `<Group>` bileşeni:
     
     -   `x`: Yatay konumunu belirler.
@@ -99,6 +102,34 @@ Video oluşturma yapısı, bileşenlerin prop'larını kullanarak yapılandırı
     -   `itemHeight`: Grup içindeki bileşenlerin yüksekliğini belirler.
     -   `itemWidth`: Grup içindeki bileşenlerin genişliğini belirler.
     -   `itemSpacing`: Grup içindeki bileşenlerin arasındaki boşluğu belirler.
+
+    `<Box>` bileşeni:
+    -  `x`: Yatay konumunu belirler.
+    -  `y`: Dikey konumunu belirler.
+    -  `width`: Genişliğini belirler.
+    -  `height`: Yüksekliğini belirler.
+    -  `in`: Giriş animasyonunu yapılandırır.
+    -  `out`: Çıkış animasyonunu yapılandırır.
+    -  `color`: Kutunun arka plan rengini belirler.
+    -  `border`: (width, color) Kutunun kenarlık rengini belirler.
+
+    `<Line>` bileşeni:
+    -  `x`: Başlangıç x konumunu belirler.
+    -  `y`: Başlangıç y konumunu belirler.
+    -  `x2`: Bitiş x konumunu belirler.
+    -  `y2`: Bitiş y konumunu belirler.
+    -  `border`: Çizginin kalınlığını belirler.
+    -  `color`: Çizginin rengini belirler.
+
+    `<Audio>` bileşeni:
+    -  `src`: Ses dosyasının yolunu belirler.
+    -  `volume`: Sesin yüksekliğini belirler.
+    -  `loop`: Sesin tekrarlanıp tekrarlanmayacağını belirler.
+    -  `muted`: Sesin kapatılıp kapatılmayacağını belirler.
+    -  `startTime`: Sesin başlangıç zamanını belirler.
+    -  `fadeIn`: Sesin bitiş zamanını belirler.
+    -  `fadeOut`: Sesin bitiş zamanını belirler.
+    
 
 Bu bileşenlere ek olarak, `<Creator>` bileşeni de kullanılmaktadır. Bu bileşen, oluşturulan videoyu adlandırmak için bir `name` prop'u alır.
 
