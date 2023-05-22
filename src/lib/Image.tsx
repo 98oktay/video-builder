@@ -7,23 +7,25 @@ import path from 'path';
 
 
 type ImageProps = {
-  x?: number,
-  y?: number,
+  x?: number| string,
+  y?: number | string,
   width?: number,
   height?: number,
   src?: string,
   url?: string,
-  radius?: number,
+  radius?: number | [number, number],
   scale?: number,
   children?: any,
   animation?: any,
+  opacity?: number,
+  aspectRatio?: number,
   blend?: string,
   relative?: [number, number],
   in?: any,
   out?: any,
   ins? : any[],
   outs? : any[],
-  border?: string,
+  border?: string | number | { color?: string, width?: number },
 } & GroupProps
 
 const Image = (props: ImageProps) => {
@@ -62,6 +64,7 @@ const Image = (props: ImageProps) => {
     ...position,
     width,
     height,
+    opacity: props.opacity || 1,
     scale: props.scale,
   });
 

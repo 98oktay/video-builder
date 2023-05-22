@@ -9,11 +9,15 @@ type TextProps = {
   y?: string | number,
   width?: number,
   height?: number,
-  size?: number,
+  size?: null | number,
+  center?: boolean,
+  rotate?: number,
   color?: string,
   font?: string,
   wrap?: string,
+  relative?: [number, number],
   children?: any,
+  style?: any,
   in?: any,
   out?: any,
 }
@@ -38,21 +42,44 @@ const Text = (props: TextProps) => {
     color: props.color || '#333333',
     ...position,
     fontSize: props.size || 20,
+    rotate: props.rotate ? (props.rotate * Math.PI) / 180 : 0,
   });
 
   if (currentGroup?.font) {
     text.setFont(currentGroup.font);
   }
+
+  if (props.style) {
+    const styles = {
+      ...props.style
+    }
+
+    if (props.size) {      
+      styles.fontSize = props.size;      
+    }
+    
+    if (props.style.font) {
+      text.setFont(props.style.font);
+    }
+    
+    text.setStyle(styles);
+  }
+
   if (props.font) {
     text.setFont(props.font);
   }
+
 
   if (props.wrap && props.wrap !== 'none') {
     text.setWrap(parseInt(props.wrap));
   }
 
+  if (props.center !== false) {
+    text.alignCenter();
+  }
+
+
   makeAnimation(text, props);
-  text.alignCenter();
 
   if (currentScene.outline) {
     const outline = new FFRect({

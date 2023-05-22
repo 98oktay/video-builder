@@ -3,18 +3,20 @@ import staticState from "./state";
 import { makeAnimation, makePosition, makeSize } from "./utils";
 import { FFRect } from "ffcreator";
 import FFGroup from "./extends/FFGroup";
-import { parse } from "path";
 
 export type GroupProps = {
   x?: string | number,
   y?: string | number,
   width?: string | number,
   height?: string | number,
+  id?: string,
   font?: string,
   list?: string,
   itemHeight?: number | string,
   itemWidth?: number | string,
   itemSpacing?: number | string,
+  itemReset?: number,
+  relative?: [number, number],
   children?: any,
   in?: any,
   out?: any,
@@ -63,7 +65,7 @@ const Group = (props: GroupProps) => {
     y: position.y - height / 2,
     width,
     height,
-  }, staticState.previousGroup);
+  }, staticState.previousGroup, props.id);
 
   if (props.font) {
     group.setFont(props.font);
@@ -81,6 +83,7 @@ const Group = (props: GroupProps) => {
       itemHeight: props.itemHeight,
       itemWidth: props.itemWidth,
       itemSpacing: props.itemSpacing,
+      itemReset: props.itemReset,
       itemCount: 0,
       nextPositionY: 0
     }

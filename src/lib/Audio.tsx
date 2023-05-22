@@ -28,9 +28,9 @@ const Audio = (props: AudioProps) => {
     loop: props.loop || false,
     mute: props.mute || false,
     startTime: props.startTime || 0,
-    fadeIn: props.fadeIn || 0,
-    fadeOut: props.fadeOut || 0,
-    volume: props.volume || 1,
+    fadeIn: props.fadeIn || -1,
+    fadeOut: props.fadeOut || -1,
+    volume: props.volume || -1,
   });
 
 

@@ -17,10 +17,11 @@ type SceneProps = {
   duration?: number,
   children?: any,
   preview?: boolean,
+  slow?: boolean,
   outline?: boolean,
 }
 
-const Scene = ({ color, duration = 6, children, preview, outline }: SceneProps) => {
+const Scene = ({ color, duration = 6, children, preview, slow, outline }: SceneProps) => {
   const { creator, scenes } = staticState;
 
   if (!creator) {
@@ -39,6 +40,11 @@ const Scene = ({ color, duration = 6, children, preview, outline }: SceneProps) 
 
   if (preview) {
     staticState.preview = scene;
+  }
+
+  if (slow) {
+    staticState.preview = scene;
+    staticState.slow = true;
   }
 
   staticState.currentScene = scene;

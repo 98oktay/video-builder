@@ -148,7 +148,12 @@ class FFLine extends FFNode {
 
   destroy() {
     this.canvas = null;
-    super.destory();
+    try {
+      super.destory();
+    } catch (e) {
+      
+    }
+    
   }
 }
 

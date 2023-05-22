@@ -13,7 +13,24 @@ export const makeAnimation = (elem, props) => {
     elem.addEffect(...props.out);
   }
   if (props.animation) {
-    elem.addAnimate(props.animation);
+    loopAnimation(elem, props.animation);
+  }
+}
+
+
+function loopAnimation(obj, conf) {
+  const {loop = 1, yoyo, ...animation} = conf;
+
+  for (let l = 0; l < loop; l++) {
+      const newOptions = {
+          ...animation,
+          delay: (animation.delay || 0) + (l * animation.time),
+      }
+      if (yoyo && l % 2) {
+          newOptions.from = {...animation.to};
+          newOptions.to = {...animation.from};
+      }
+      obj.addAnimate({...newOptions});
   }
 }
 
@@ -144,6 +161,17 @@ export const makeSize = (props) => {
   }
 }
 
+
+export const resetGroupIndex = () => {
+  const { currentGroup } = staticState;
+  if (currentGroup?.listOptions) {
+    console.log("resetGroupIndex", staticState.currentGroup.id);
+    //staticState.currentGroup.listOptions.nextPositionY = 0;
+
+  }
+}
+
+
 export const makePosition = (props) => {
   const { currentScene, currentGroup, options } = staticState;
 
@@ -171,7 +199,7 @@ export const makePosition = (props) => {
   }
 
   if (currentGroup?.listOptions) {
-    const { type, itemSpacing, nextPositionY, itemHeight } = currentGroup.listOptions;
+    const { type, itemSpacing, nextPositionY,itemReset, itemHeight } = currentGroup.listOptions;
     if (type === "vertical") {
       pos.y = "top";
       if (nextPositionY && itemSpacing) {
@@ -180,6 +208,10 @@ export const makePosition = (props) => {
       bounds.y += nextPositionY;
       currentGroup.listOptions.nextPositionY += (itemHeight || height);
       currentGroup.listOptions.itemCount++;
+      if(itemReset === currentGroup.listOptions.itemCount) {
+        currentGroup.listOptions.nextPositionY = 0;
+        currentGroup.listOptions.itemCount = 0;
+      }
     }
 
 

@@ -3,21 +3,26 @@ import path from "path";
 import { Creator, Group, Image, Scene, Text, Transition, Video } from "./lib";
 import Box from "./lib/Box";
 import Line from "./lib/Line";
+import Lottie from "./lib/Lottie";
 
 const fontAllison = path.join(__dirname, "../src", "fonts", "Allison-Regular.ttf")
+
+const lottieFile = path.join(__dirname, "../src", "assets", "lottie", "143739-industrial-automatic-robot-arms.json")
+const assets = path.join(__dirname, "../src", "assets")
 
 function Composition() {
 
   return (
     <Creator name="video1" fps={30} width={800} height={900}>
 
-      <Scene color="transparent" duration={5} preview>
+      <Scene color="#efefef" duration={9}>
         <Image
           radius={[40, 140]}
           border={{ width: 32, color: 'white' }}
           url="https://images.pexels.com/videos/1409899/free-video-1409899.jpg?auto=compress&cs=tinysrgb&w=800" width={400} height={200} y={22} in={['fadeInLeft', 1, 0]}>
           <Text y={"90%"} color="white">Rounded and Bordered Image</Text>
         </Image>
+
 
         <Group x={"30%"} y={"40%"} width={300} height={300} in={['fadeInUp', 1, 0]}
           out={['fadeOut', 1, 2]}>
@@ -45,6 +50,11 @@ function Composition() {
           x2={700} y2={300}
           border={2} color={["#ff0000", "#ffff00"]}
           in={['bounceInDown', 1, .2]} />
+
+
+        <Lottie file={lottieFile} width={400} height={400} x={"right"} y={"bottom"} in={['fadeInUp', 1, 0]} />
+        <Lottie file={assets + "/lottie/143939-samurai-idle-animation.json"} width={200} height={200} x={0} y={0} in={['fadeInUp', 1, 0]} />
+
 
       </Scene>
       <Transition effect="TricolorCircle" duration={3} />

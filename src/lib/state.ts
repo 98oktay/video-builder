@@ -9,6 +9,7 @@ type StateType = {
   currentScene?: any,
   options?: any,
   preview?: { [key: string] : any },
+  slow?: boolean
 }
 
 const state: StateType = {

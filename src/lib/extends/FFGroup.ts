@@ -6,10 +6,12 @@ class FFGroup {
   bounds: any;
   parent: any;
   font: any;
+  id?: string;
   listOptions: any;
 
 
-  constructor(bounds, parent) {
+  constructor(bounds, parent, id) {
+    this.id = id;
     this.childs = [];
     this.bounds = { ...bounds }
     this.parent = parent;

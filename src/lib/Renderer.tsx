@@ -9,11 +9,21 @@ const Renderer = () => {
 
   if (staticState.preview) {
 
-    staticState.creator.setFps(1);
-    staticState.preview.setDuration(1);
+    if(staticState.slow)  {
+      staticState.creator.setFps(5);
+      staticState.preview.setDuration(5);  
+    } else {
+      staticState.creator.setFps(1);
+      staticState.preview.setDuration(1);
+  
+    }
 
     preview?.children.forEach(child => {
-      child.animations.destroy();
+      if(staticState.slow)  {
+        // 
+      } else {
+        child.animations.destroy();
+      }
     });
 
     scenes.forEach(scene => {
